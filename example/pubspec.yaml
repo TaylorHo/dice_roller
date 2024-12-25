@@ -1,0 +1,32 @@
+name: example
+description: "A new Flutter project."
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dice_roller:
+    path: ../
+  flame: ^1.22.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/background/
+    - assets/images/dices/d4/
+    - assets/images/dices/d6/
+    - assets/images/dices/d8/
+    - assets/images/dices/d10/
+    - assets/images/dices/d12/
+    - assets/images/dices/d20/
+    - assets/images/dices/rolling/
