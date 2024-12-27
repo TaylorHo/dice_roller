@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'dart:math';
 
+import 'package:dice_roller/dice_customization/dice_base.dart';
 import 'package:dice_roller/dice_customization/dice_images.dart';
 import 'package:dice_roller/dice_customization/dice_rolling.dart';
 import 'package:dice_roller/dice_customization/models.dart';
@@ -39,7 +41,15 @@ void main() {
   );
 }
 
-class MyWorld extends World with HasGameRef<FlameGame> {}
+class MyWorld extends World with HasGameRef<FlameGame> {
+  @override
+  FutureOr<void> onLoad() async {
+    super.onLoad();
+
+    // Preload all sprites before using them
+    DiceBase(Dice.d20).preloadImages();
+  }
+}
 
 class DiceRollerButton extends StatelessWidget {
   final FlameGame game;
@@ -81,13 +91,11 @@ class DiceRollerInput extends StatefulWidget {
 
 class _DiceRollerInputState extends State<DiceRollerInput> {
   final TextEditingController _controller = TextEditingController();
-  List<Stack> images = [];
   String activeButton = '';
 
   @override
   void initState() {
     super.initState();
-    _loadImages();
 
     // Add a listener to track manual changes in the text field
     _controller.addListener(() {
@@ -101,20 +109,6 @@ class _DiceRollerInputState extends State<DiceRollerInput> {
           activeButton = '';
         });
       }
-    });
-  }
-
-  Future<void> _loadImages() async {
-    final Stack d4Image = await DiceStaticImage(Dice.d4).img;
-    final Stack d6Image = await DiceStaticImage(Dice.d6).img;
-    final Stack d8Image = await DiceStaticImage(Dice.d8).img;
-    final Stack d10Image = await DiceStaticImage(Dice.d10).img;
-    final Stack d12Image = await DiceStaticImage(Dice.d12).img;
-    final Stack d20Image = await DiceStaticImage(Dice.d20).img;
-
-    // Once all images are loaded, update the state
-    setState(() {
-      images = [d4Image, d6Image, d8Image, d10Image, d12Image, d20Image];
     });
   }
 
@@ -229,22 +223,92 @@ class _DiceRollerInputState extends State<DiceRollerInput> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.min,
-                children: images.isNotEmpty
-                    ? [
-                        SizedBox(width: 48, height: 48, child: images[0]),
-                        SizedBox(width: 48, height: 48, child: images[1]),
-                        SizedBox(width: 48, height: 48, child: images[2]),
-                        SizedBox(width: 48, height: 48, child: images[3]),
-                        SizedBox(width: 48, height: 48, child: images[4]),
-                        SizedBox(width: 48, height: 48, child: images[5]),
-                      ]
-                    : const [
-                        CirclePlaceholder(),
-                        CirclePlaceholder(),
-                        CirclePlaceholder(),
-                        CirclePlaceholder(),
-                        CirclePlaceholder(),
-                      ],
+                children: [
+                  FutureBuilder<Stack>(
+                    future: DiceStaticImage(Dice.d4).img,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return SizedBox(
+                          width: 48,
+                          height: 48,
+                          child: snapshot.data,
+                        );
+                      } else {
+                        return const CirclePlaceholder();
+                      }
+                    },
+                  ),
+                  FutureBuilder<Stack>(
+                    future: DiceStaticImage(Dice.d6).img,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return SizedBox(
+                          width: 48,
+                          height: 48,
+                          child: snapshot.data,
+                        );
+                      } else {
+                        return const CirclePlaceholder();
+                      }
+                    },
+                  ),
+                  FutureBuilder<Stack>(
+                    future: DiceStaticImage(Dice.d8).img,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return SizedBox(
+                          width: 48,
+                          height: 48,
+                          child: snapshot.data,
+                        );
+                      } else {
+                        return const CirclePlaceholder();
+                      }
+                    },
+                  ),
+                  FutureBuilder<Stack>(
+                    future: DiceStaticImage(Dice.d10).img,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return SizedBox(
+                          width: 48,
+                          height: 48,
+                          child: snapshot.data,
+                        );
+                      } else {
+                        return const CirclePlaceholder();
+                      }
+                    },
+                  ),
+                  FutureBuilder<Stack>(
+                    future: DiceStaticImage(Dice.d12).img,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return SizedBox(
+                          width: 48,
+                          height: 48,
+                          child: snapshot.data,
+                        );
+                      } else {
+                        return const CirclePlaceholder();
+                      }
+                    },
+                  ),
+                  FutureBuilder<Stack>(
+                    future: DiceStaticImage(Dice.d20).img,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return SizedBox(
+                          width: 48,
+                          height: 48,
+                          child: snapshot.data,
+                        );
+                      } else {
+                        return const CirclePlaceholder();
+                      }
+                    },
+                  ),
+                ],
               ),
               const SizedBox(height: 15),
               Row(

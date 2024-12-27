@@ -62,6 +62,22 @@ class DiceBase extends PositionComponent {
     }
   }
 
+  Future<void> preloadImages() async {
+    await _preloadImages(getDiceString(Dice.d4));
+    await _preloadImages(getDiceString(Dice.d6));
+    await _preloadImages(getDiceString(Dice.d8));
+    await _preloadImages(getDiceString(Dice.d10));
+    await _preloadImages(getDiceString(Dice.d12));
+    await _preloadImages(getDiceString(Dice.d20));
+    await _preloadImages('rolling');
+  }
+
+  Future<void> _preloadImages(String dice) async {
+    await Flame.images.load('dices/$dice/main.png');
+    await Flame.images.load('dices/$dice/details.png');
+    await Flame.images.load('dices/$dice/effects.png');
+  }
+
   @override
   Future<void> onLoad() async {
     final [
