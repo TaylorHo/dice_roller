@@ -1,7 +1,7 @@
 name: dice_roller
 description: "Animations for Dice Rolling using Flame"
 version: 0.1.1
-homepage: https://github.com/TaylorHo/dice_roller
+homepage: https://github.com/hotaydev/arcanapixel_dice_roller
 license: AGPL-3.0
 
 environment:

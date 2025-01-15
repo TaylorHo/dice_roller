@@ -57,8 +57,6 @@ class DiceBase extends PositionComponent {
       case Dice.d4:
         assert(diceValue <= 4, "Dice d4 can't be more than 4");
         break;
-      default:
-        throw Exception('Dice value not defined!');
     }
   }
 

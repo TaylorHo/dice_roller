@@ -12,6 +12,7 @@ dependencies:
   dice_roller:
     path: ../
   flame: ^1.22.0
+  url_launcher: ^6.3.1
 
 dev_dependencies:
   flutter_test:

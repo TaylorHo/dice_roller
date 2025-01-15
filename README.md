@@ -17,7 +17,7 @@ dependencies:
   # Add this line
   dice_roller:
     git:
-      url: https://github.com/TaylorHo/dice_roller.git
+      url: https://github.com/hotaydev/arcanapixel_dice_roller.git
       ref: main # branch name
 ```
 

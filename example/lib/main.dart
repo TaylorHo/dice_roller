@@ -9,6 +9,7 @@ import 'package:dice_roller/dice_roll/dice_roll.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final ValueNotifier<List<Map<String, String>>> historyNotifier =
     ValueNotifier([]);
@@ -34,8 +35,13 @@ void main() {
               DiceRollerInput(game: game),
           'diceRollHistory': (BuildContext context, FlameGame<World> game) =>
               const DiceRollHistory(),
+          'githubButton': (c, g) => const GoToGithubButton(),
         },
-        initialActiveOverlays: const ['diceRollerButton', 'diceRollHistory'],
+        initialActiveOverlays: const [
+          'diceRollerButton',
+          'diceRollHistory',
+          'githubButton',
+        ],
       ),
     ),
   );
@@ -486,6 +492,30 @@ class DiceRollHistory extends StatelessWidget {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class GoToGithubButton extends StatelessWidget {
+  const GoToGithubButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: ElevatedButton(
+          onPressed: () async {
+            final Uri url = Uri.parse(
+                'https://github.com/hotaydev/arcanapixel_dice_roller');
+            if (!await launchUrl(url)) {
+              throw Exception('Could not launch $url');
+            }
+          },
+          child: const Text('GitHub'),
         ),
       ),
     );
