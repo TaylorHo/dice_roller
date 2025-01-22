@@ -53,7 +53,7 @@ class MyWorld extends World with HasGameRef<FlameGame> {
     super.onLoad();
 
     // Preload all sprites before using them
-    DiceBase(Dice.d20).preloadImages();
+    await DiceBase(Dice.d20).preloadImages();
   }
 }
 
