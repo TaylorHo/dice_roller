@@ -1,6 +1,6 @@
 name: dice_roller
 description: "Animations for Dice Rolling using Flame"
-version: 0.1.1
+version: 0.1.2
 homepage: https://github.com/hotaydev/arcanapixel_dice_roller
 license: AGPL-3.0
 
@@ -11,12 +11,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flame: ^1.22.0
+  flame: ^1.24.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
 
 flutter:
   uses-material-design: true

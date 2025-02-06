@@ -47,15 +47,7 @@ void main() {
   );
 }
 
-class MyWorld extends World with HasGameRef<FlameGame> {
-  @override
-  FutureOr<void> onLoad() async {
-    super.onLoad();
-
-    // Preload all sprites before using them
-    await DiceBase(Dice.d20).preloadImages();
-  }
-}
+class MyWorld extends World with HasGameRef<FlameGame> {}
 
 class DiceRollerButton extends StatelessWidget {
   final FlameGame game;
@@ -103,6 +95,7 @@ class _DiceRollerInputState extends State<DiceRollerInput> {
   void initState() {
     super.initState();
 
+    preloadDices();
     // Add a listener to track manual changes in the text field
     _controller.addListener(() {
       final text = _controller.text;
@@ -116,6 +109,10 @@ class _DiceRollerInputState extends State<DiceRollerInput> {
         });
       }
     });
+  }
+
+  Future<void> preloadDices() async {
+    await DiceBase(Dice.d20).preloadImages();
   }
 
   @override
@@ -448,7 +445,7 @@ class DiceRollHistory extends StatelessWidget {
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black
-                                        .withOpacity(0.1), // Shadow color
+                                        .withValues(alpha: 0.1), // Shadow color
                                     blurRadius: 4.0, // Shadow blur radius
                                     offset:
                                         const Offset(0, 2), // Shadow position
